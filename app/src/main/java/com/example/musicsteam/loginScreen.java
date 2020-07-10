@@ -1,7 +1,5 @@
 package com.example.musicsteam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class loginScreen extends AppCompatActivity {
 
@@ -57,7 +57,7 @@ public class loginScreen extends AppCompatActivity {
                 /* Check if the user inputs are empty */
                 if(userEmail.isEmpty() || userPassword.isEmpty()) {
                     /* Display a message toast to user to enter the details */
-                    Toast.makeText(loginScreen.this, "Please Enter Email & Password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(loginScreen.this, "Please Enter Your Email & Password!", Toast.LENGTH_LONG).show();
 
                 }else {
 
