@@ -13,23 +13,22 @@ import androidx.appcompat.app.AppCompatActivity;
 public class loginScreen extends AppCompatActivity {
 
     /* Define the UI elements */
-    private EditText eEmail;
+    private EditText eAccountName;
     private EditText ePassword;
     private TextView eAttemptsInfo;
     private Button eLogin;
     private int counter = 3;
+    public boolean guestmode = true;
 
-    String userEmail = "";
+    String userAccountName = "";
     String userPassword = "";
 
     /* Class to hold credentials */
-    class Credentials
+    static class Credentials
     {
-        String email = "leo@mail.com";
+        String accountName = "slimy";
         String password = "leo";
-
-        String email1 = "leo1@mail.com";
-        String password1 = "leo1";
+        int accountPicture = R.drawable.symphony;
     }
 
     boolean isValid = false;
@@ -38,9 +37,9 @@ public class loginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-
+        guestmode = false;
         /* Bind the XML views to Java Code Elements */
-        eEmail = findViewById(R.id.etEmail);
+        eAccountName = findViewById(R.id.eAccountName);
         ePassword = findViewById(R.id.etPassword);
         eAttemptsInfo = findViewById(R.id.tvAttempts);
         eLogin = findViewById(R.id.btnCreateAccount);
@@ -51,18 +50,18 @@ public class loginScreen extends AppCompatActivity {
             public void onClick(View view) {
 
                 /* Obtain user inputs */
-                userEmail = eEmail.getText().toString();
+                userAccountName = eAccountName.getText().toString();
                 userPassword = ePassword.getText().toString();
 
                 /* Check if the user inputs are empty */
-                if(userEmail.isEmpty() || userPassword.isEmpty()) {
+                if(userAccountName.isEmpty() || userPassword.isEmpty()) {
                     /* Display a message toast to user to enter the details */
                     Toast.makeText(loginScreen.this, "Please Enter Your Email & Password!", Toast.LENGTH_LONG).show();
 
                 }else {
 
                     /* Validate the user inputs */
-                    isValid = validate(userEmail, userPassword);
+                    isValid = validate(userAccountName, userPassword);
 
                     /* Validate the user inputs */
 
@@ -82,7 +81,7 @@ public class loginScreen extends AppCompatActivity {
                         }
                         /* Display error message */
                         else {
-                            Toast.makeText(loginScreen.this, "Incorrect credentials, please try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(loginScreen.this, "Incorrect credentials, please exit and try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                     /* If valid */
@@ -98,18 +97,13 @@ public class loginScreen extends AppCompatActivity {
     }
 
     /* Validate the credentials */
-    private boolean validate(String userEmail, String userPassword)
+    private boolean validate(String accountName, String userPassword)
     {
         /* Get the object of Credentials class */
         Credentials credentials = new Credentials();
 
         /* Check the credentials */
-        if(userEmail.equals(credentials.email) && userPassword.equals(credentials.password))
-        {
-            return true;
-        }
-
-        else if(userEmail.equals(credentials.email1) && userPassword.equals(credentials.password1))
+        if(accountName.equals(credentials.accountName) && userPassword.equals(credentials.password))
         {
             return true;
         }
