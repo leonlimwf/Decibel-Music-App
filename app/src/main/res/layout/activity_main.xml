@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    tools:context=".MainActivity">
+
+
+    <ImageButton
+        android:id="@+id/S1001"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="168dp"
+        android:background="#000000"
+        android:onClick="handleSelection"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/michael_buble_collection" />
+
+    <TextView
+        android:id="@+id/txtArtiste1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/arial"
+        android:letterSpacing="0.03"
+        android:text="Michael"
+        android:textColor="@color/artistColor"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/S1001"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitle1" />
+
+    <TextView
+        android:id="@+id/txtArtiste3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/arial"
+        android:letterSpacing="0.03"
+        android:text="Ed Sheeran"
+        android:textColor="@color/artistColor"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/S1003"
+        app:layout_constraintTop_toBottomOf="@+id/txtTItle3" />
+
+    <TextView
+        android:id="@+id/txtTitle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="188dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.03"
+        android:text="The Way You Look Tonight"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toEndOf="@+id/S1001"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTItle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.03"
+        android:text="Billie Jean"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toEndOf="@+id/S1002"
+        app:layout_constraintTop_toBottomOf="@+id/txtArtiste1" />
+
+    <TextView
+        android:id="@+id/txtTItle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="48dp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.03"
+        android:text="Photograph"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toEndOf="@+id/S1003"
+        app:layout_constraintTop_toBottomOf="@+id/txtArtiste2" />
+
+    <TextView
+        android:id="@+id/txtArtiste2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/arial"
+        android:letterSpacing="0.03"
+        android:text="Michael Jackson"
+        android:textColor="@color/artistColor"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/S1002"
+        app:layout_constraintTop_toBottomOf="@+id/txtTItle2" />
+
+    <ImageButton
+        android:id="@+id/S1003"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="#000000"
+        android:onClick="handleSelection"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/S1002"
+        app:srcCompat="@drawable/photograph" />
+
+    <ImageButton
+        android:id="@+id/S1002"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:background="#000000"
+        android:onClick="handleSelection"
+        android:scaleType="centerCrop"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/S1001"
+        app:srcCompat="@drawable/billie_jean" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/bahnschrift"
+        android:text="Hello!"
+        android:textColor="#707070"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/productsans_bold"
+        android:text="Recommended for you"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:text="Recommended for you" />
+
+    <ImageButton
+        android:id="@+id/user_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/user_profile"
+        app:srcCompat="@drawable/guest_login" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
