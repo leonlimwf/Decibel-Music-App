@@ -1,13 +1,16 @@
 package com.example.musicsteam;
 
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +23,7 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class PlaySongActivity extends AppCompatActivity {
+public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private static final String BASE_URL = "https://p.scdn.co/mp3-preview/";
     private String songId = "";
     private String title = "";
@@ -331,6 +334,34 @@ public class PlaySongActivity extends AppCompatActivity {
         boolean shouldPlayNext = player.isPlaying();
         if (player.isPlaying() == false) {
             playSong(true);
+        }
+    }
+
+    public void showPopup(View v) {
+        PopupMenu popup = new PopupMenu(this, v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.settings:
+                Intent goToProfileSettings = new Intent(this, profilesettings.class);
+                startActivity(goToProfileSettings);
+                return true;
+            case R.id.share:
+                Intent goToSharePage = new Intent(this, share.class);
+                startActivity(goToSharePage);
+                return true;
+            case R.id.item3:
+                Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.item4:
+                Toast.makeText(this, "Item 4 clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return false;
         }
     }
 

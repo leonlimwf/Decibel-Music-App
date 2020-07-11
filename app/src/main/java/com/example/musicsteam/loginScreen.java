@@ -17,8 +17,11 @@ public class loginScreen extends AppCompatActivity {
     private EditText ePassword;
     private TextView eAttemptsInfo;
     private Button eLogin;
+
+
+
     private int counter = 3;
-    public boolean guestmode = true;
+    public boolean guestMode = true;
 
     String userAccountName = "";
     String userPassword = "";
@@ -37,7 +40,6 @@ public class loginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-        guestmode = false;
         /* Bind the XML views to Java Code Elements */
         eAccountName = findViewById(R.id.eAccountName);
         ePassword = findViewById(R.id.etPassword);
@@ -48,7 +50,6 @@ public class loginScreen extends AppCompatActivity {
         eLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 /* Obtain user inputs */
                 userAccountName = eAccountName.getText().toString();
                 userPassword = ePassword.getText().toString();
@@ -81,13 +82,14 @@ public class loginScreen extends AppCompatActivity {
                         }
                         /* Display error message */
                         else {
-                            Toast.makeText(loginScreen.this, "Incorrect credentials, please exit and try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(loginScreen.this, "Incorrect credentials, please try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                     /* If valid */
                     else {
 
                         /* Allow the user in to your app by going into the next activity */
+                        guestMode = false;
                         startActivity(new Intent(loginScreen.this, MainActivity.class));
                     }
 

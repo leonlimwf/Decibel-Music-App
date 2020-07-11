@@ -25,12 +25,13 @@ public class profilesettings extends AppCompatActivity {
         gobackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToMainPage();
+               onBackPressed();
             }
         });
 
-        accountName = findViewById(R.id.accountName);
+
         loginScreen.Credentials credentials = new loginScreen.Credentials();
+        accountName = findViewById(R.id.accountName);
         accountName.setText(credentials.accountName);
 
 
@@ -44,11 +45,6 @@ public class profilesettings extends AppCompatActivity {
 
         accountPicture = findViewById(R.id.accountPicture);
         accountPicture.setImageResource(credentials.accountPicture);
-    }
-
-    public void goToMainPage() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
     }
 
     public void logout() {
