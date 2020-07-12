@@ -1,11 +1,11 @@
 package com.example.musicsteam;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class startScreen extends AppCompatActivity {
     private Button button;
@@ -23,13 +23,6 @@ public class startScreen extends AppCompatActivity {
             }
         });
 
-        button = (Button) findViewById(R.id.guest_login);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToMainActivity();
-            }
-        });
     }
 
     public void goLoginPage() {
@@ -37,8 +30,5 @@ public class startScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToMainActivity() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
+
