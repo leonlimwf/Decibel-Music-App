@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2C2C2C">
+    android:background="#000000">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="656dp"
+        android:layout_height="640dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="91dp"
         android:background="#000000"
         android:padding="4dp"
         android:scrollbars="vertical" />
@@ -23,8 +23,8 @@
         android:layout_height="46dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="13dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         tools:srcCompat="@tools:sample/avatars" />
 
 
