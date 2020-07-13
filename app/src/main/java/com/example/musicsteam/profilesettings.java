@@ -3,6 +3,7 @@ package com.example.musicsteam;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ public class profilesettings extends AppCompatActivity {
     private TextView accountName;
     private ImageButton logoutBtn;
     private ImageView accountPicture;
+    private Button editBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,23 @@ public class profilesettings extends AppCompatActivity {
 
         accountPicture = findViewById(R.id.accountPicture);
         accountPicture.setImageResource(credentials.accountPicture);
+
+        editBtn = findViewById(R.id.btnEdit);
+        editBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToProfileSettings();
+            }
+        });
     }
 
     public void logout() {
         Intent intent = new Intent(this, splashScreen.class);
+        startActivity(intent);
+    }
+
+    public void goToProfileSettings() {
+        Intent intent = new Intent (this, EditProfileActivity.class);
         startActivity(intent);
     }
 }

@@ -14,7 +14,6 @@ public class startScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_screen);
-
         button = (Button) findViewById(R.id.google_login);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,13 +21,12 @@ public class startScreen extends AppCompatActivity {
                 goLoginPage();
             }
         });
-
     }
 
     public void goLoginPage() {
         Intent intent = new Intent(this, loginScreen.class);
         startActivity(intent);
+        finish();
     }
-
 }
 

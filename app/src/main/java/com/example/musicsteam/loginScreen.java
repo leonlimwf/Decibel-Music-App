@@ -91,6 +91,7 @@ public class loginScreen extends AppCompatActivity {
                         /* Allow the user in to your app by going into the next activity */
                         guestMode = false;
                         startActivity(new Intent(loginScreen.this, MainActivity.class));
+                        finish();
                     }
 
                 }
