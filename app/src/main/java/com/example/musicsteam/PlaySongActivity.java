@@ -1,8 +1,12 @@
 package com.example.musicsteam;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.musicsteam.util.AppUtil;
@@ -344,6 +349,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         popup.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.P)
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
@@ -353,6 +359,11 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
             case R.id.share:
                 Intent goToSharePage = new Intent(this, share.class);
                 startActivity(goToSharePage);
+                String baseURL = "https://p.scdn.co/mp3-preview/";
+                String shareLink = baseURL + fileLink;
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Share Link",shareLink );
+                clipboard.setPrimaryClip(clip);
                 return true;
             case R.id.item3:
                 Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show();
