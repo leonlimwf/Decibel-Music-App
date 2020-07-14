@@ -6,7 +6,7 @@ import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class share extends AppCompatActivity {
+public class ShareActivity extends AppCompatActivity {
 
     private ImageButton goBack;
     @Override

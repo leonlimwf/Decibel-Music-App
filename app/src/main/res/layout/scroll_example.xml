@@ -6,26 +6,58 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
+    <TextView
+        android:id="@+id/helloTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="96dp"
+        android:fontFamily="@font/bahnschrift"
+        android:text="Hello!"
+        android:textColor="#707070"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="640dp"
+        android:layout_height="568dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="91dp"
+        android:layout_marginTop="163dp"
         android:background="#000000"
         android:padding="4dp"
         android:scrollbars="vertical" />
 
     <ImageButton
-        android:id="@+id/userprofiletest"
-        android:layout_width="49dp"
-        android:layout_height="46dp"
+        android:id="@+id/user_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/user_profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/guest_login" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="119dp"
+        android:fontFamily="@font/productsans_bold"
+        android:text="Recommended For You"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

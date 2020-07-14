@@ -7,13 +7,13 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import gr.net.maroulis.library.EasySplashScreen;
-public class splashScreen extends AppCompatActivity {
+public class SplashScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasySplashScreen config = new EasySplashScreen(splashScreen.this)
+        EasySplashScreen config = new EasySplashScreen(SplashScreenActivity.this)
                 .withFullScreen()
-                .withTargetActivity(startScreen.class)
+                .withTargetActivity(StartScreenActivity.class)
                 .withSplashTimeOut(3000)
                 .withBackgroundColor(Color.parseColor("#000000"))
                 .withLogo(R.drawable.splashscreen);

@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class loginScreen extends AppCompatActivity {
+public class LoginScreenActivity extends AppCompatActivity {
 
     /* Define the UI elements */
     private EditText eAccountName;
@@ -57,7 +57,7 @@ public class loginScreen extends AppCompatActivity {
                 /* Check if the user inputs are empty */
                 if(userAccountName.isEmpty() || userPassword.isEmpty()) {
                     /* Display a message toast to user to enter the details */
-                    Toast.makeText(loginScreen.this, "Please Enter Your Email & Password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginScreenActivity.this, "Please Enter Your Email & Password!", Toast.LENGTH_LONG).show();
 
                 }else {
 
@@ -78,11 +78,11 @@ public class loginScreen extends AppCompatActivity {
                         /* Disable the login button if there are no attempts left */
                         if (counter == 0) {
                             eLogin.setEnabled(false);
-                            Toast.makeText(loginScreen.this, "You have used all your attempts try again later!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreenActivity.this, "You have used all your attempts try again later!", Toast.LENGTH_LONG).show();
                         }
                         /* Display error message */
                         else {
-                            Toast.makeText(loginScreen.this, "Incorrect credentials, please try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreenActivity.this, "Incorrect credentials, please try again!", Toast.LENGTH_LONG).show();
                         }
                     }
                     /* If valid */
@@ -90,7 +90,7 @@ public class loginScreen extends AppCompatActivity {
 
                         /* Allow the user in to your app by going into the next activity */
                         guestMode = false;
-                        startActivity(new Intent(loginScreen.this, MainActivity.class));
+                        startActivity(new Intent(LoginScreenActivity.this, scrollexample.class));
                         finish();
                     }
 

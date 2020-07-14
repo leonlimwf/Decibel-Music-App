@@ -129,7 +129,7 @@
         app:srcCompat="@drawable/billie_jean" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/helloTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -137,6 +137,7 @@
         android:fontFamily="@font/bahnschrift"
         android:text="Hello!"
         android:textColor="#707070"
+        android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -145,13 +146,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="5dp"
         android:fontFamily="@font/productsans_bold"
         android:text="Recommended for you"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/helloTextView"
         tools:text="Recommended for you" />
 
     <ImageButton

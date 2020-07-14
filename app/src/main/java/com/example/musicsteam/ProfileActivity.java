@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class profilesettings extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity {
 
     private ImageButton gobackBtn;
     private TextView accountName;
@@ -21,18 +21,18 @@ public class profilesettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profilesettings);
+        setContentView(R.layout.activity_profile);
 
         gobackBtn = findViewById(R.id.goBack);
         gobackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               onBackPressed();
+                onBackPressed();
             }
         });
 
 
-        loginScreen.Credentials credentials = new loginScreen.Credentials();
+        LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
         accountName = findViewById(R.id.accountName);
         accountName.setText(credentials.accountName);
 
@@ -58,12 +58,12 @@ public class profilesettings extends AppCompatActivity {
     }
 
     public void logout() {
-        Intent intent = new Intent(this, splashScreen.class);
+        Intent intent = new Intent(this, SplashScreenActivity.class);
         startActivity(intent);
     }
 
     public void goToProfileSettings() {
-        Intent intent = new Intent (this, EditProfileActivity.class);
+        Intent intent = new Intent (this, ProfileSettingsActivity.class);
         startActivity(intent);
     }
 }

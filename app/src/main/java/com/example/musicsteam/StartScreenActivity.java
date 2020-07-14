@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class startScreen extends AppCompatActivity {
+public class StartScreenActivity extends AppCompatActivity {
     private Button button;
 
     @Override
@@ -24,7 +24,7 @@ public class startScreen extends AppCompatActivity {
     }
 
     public void goLoginPage() {
-        Intent intent = new Intent(this, loginScreen.class);
+        Intent intent = new Intent(this, LoginScreenActivity.class);
         startActivity(intent);
         finish();
     }

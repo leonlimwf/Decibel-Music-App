@@ -353,11 +353,11 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                Intent goToProfileSettings = new Intent(this, profilesettings.class);
+                Intent goToProfileSettings = new Intent(this, ProfileSettingsActivity.class);
                 startActivity(goToProfileSettings);
                 return true;
             case R.id.share:
-                Intent goToSharePage = new Intent(this, share.class);
+                Intent goToSharePage = new Intent(this, ShareActivity.class);
                 startActivity(goToSharePage);
                 String baseURL = "https://p.scdn.co/mp3-preview/";
                 String shareLink = baseURL + fileLink;

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +14,8 @@ import com.example.musicsteam.util.AppUtil;
 public class MainActivity extends AppCompatActivity {
     private SongCollection songCollection = new SongCollection();
     private ImageButton button;
+    private TextView helloTextView;
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +28,13 @@ public class MainActivity extends AppCompatActivity {
                 openUserProfilePage();
             }
         });
+        helloTextView = findViewById(R.id.helloTextView);
+        final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
+        helloTextView.setText("Hello " + credentials.accountName);
     }
 
     public void openUserProfilePage () {
-        Intent intent = new Intent(this, profilesettings.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 

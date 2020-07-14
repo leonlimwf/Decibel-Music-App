@@ -33,7 +33,7 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imageView);
-            mTextView1 = itemView.findViewById(R.id.textView);
+            mTextView1 = itemView.findViewById(R.id.helloTextView);
             mTextView2 = itemView.findViewById(R.id.textView2);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

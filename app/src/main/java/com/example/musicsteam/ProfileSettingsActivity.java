@@ -17,11 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
 
-public class EditProfileActivity extends AppCompatActivity {
+public class ProfileSettingsActivity extends AppCompatActivity {
     private Button button;
     private ImageView accountPicture;
     private TextView changeProfilePic;
     private ImageButton goBack2;
+    private TextView saveBtn;
+
     private static final int PICK_IMAGE = 1;
     Uri imageUri;
     SharedPreferences sharedPref;
@@ -30,11 +32,11 @@ public class EditProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editprofile);
+        setContentView(R.layout.activity_profilesettings);
 
-        final loginScreen.Credentials credentials = new loginScreen.Credentials();
+        final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
 
-        sharedPref = EditProfileActivity.this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = ProfileSettingsActivity.this.getPreferences(Context.MODE_PRIVATE);
         String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
 
         goBack2 = findViewById(R.id.goBack2);
@@ -45,7 +47,13 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-
+        saveBtn = findViewById(R.id.savebtn);
+        saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goBack();
+            }
+        });
         button = findViewById(R.id.editprofile_name);
         button.setText(credentials.accountName);
 
@@ -63,8 +71,8 @@ public class EditProfileActivity extends AppCompatActivity {
 
         changeProfilePic = findViewById(R.id.changeprofilepicbtn);
         changeProfilePic.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
                 Intent gallery = new Intent();
                 gallery.setType("image/*");
                 gallery.setAction(Intent.ACTION_OPEN_DOCUMENT);

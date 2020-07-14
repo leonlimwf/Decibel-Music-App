@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +19,7 @@ public class scrollexample extends AppCompatActivity {
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton imagebutton;
+    private TextView helloTextView2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,17 +27,21 @@ public class scrollexample extends AppCompatActivity {
         setContentView(R.layout.scroll_example);
         createExampleList();
         buildRecyclerView();
-        imagebutton = (ImageButton) findViewById(R.id.userprofiletest);
+        imagebutton = (ImageButton) findViewById(R.id.user_profile);
         imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openUserProfilePage();
             }
         });
+
+        helloTextView2 = findViewById(R.id.helloTextView2);
+        final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
+        helloTextView2.setText("Hello " + credentials.accountName);
     }
 
     public void openUserProfilePage () {
-        Intent intent = new Intent(this, profilesettings.class);
+        Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
 

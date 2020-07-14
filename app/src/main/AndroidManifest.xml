@@ -12,15 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditProfileActivity"></activity>
+        <activity android:name=".ProfileActivity"></activity>
         <activity android:name=".PlaySongActivity" />
-        <activity android:name=".loginScreen" />
+        <activity android:name=".LoginScreenActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".profilesettings" />
-        <activity android:name=".startScreen" />
-        <activity android:name=".share" />
+        <activity android:name=".ProfileSettingsActivity" />
+        <activity android:name=".StartScreenActivity" />
+        <activity android:name=".ShareActivity" />
         <activity android:name=".scrollexample" />
-        <activity android:name=".splashScreen">
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
