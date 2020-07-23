@@ -116,7 +116,7 @@
         app:srcCompat="@drawable/photograph" />
 
     <ImageButton
-        android:id="@+id/S1002"
+        android:id="@+id/chillhits"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="24dp"

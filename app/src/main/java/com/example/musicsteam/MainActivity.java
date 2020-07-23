@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     public void handleSelection(View view) {
         String resourceId = AppUtil.getResourceId(this, view);
         Song selectedSong = songCollection.searchById(resourceId);
-        AppUtil.popMessage(this, "Streaming "+ selectedSong.getTitle() + " by " + selectedSong.getArtiste());
         sendDataToActivity(selectedSong);
     }
 

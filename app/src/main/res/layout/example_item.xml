@@ -7,26 +7,22 @@
     android:layout_margin="5dp"
     android:background="#000000">
 
-    <com.makeramen.roundedimageview.RoundedImageView
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="2dp"
-        android:scaleType="fitXY"
-        app:riv_corner_radius="30dip"
-        app:riv_mutate_background="true"
-        app:riv_oval="false"
-        app:riv_tile_mode="repeat" />
+        android:scaleType="fitXY" />
 
     <TextView
-        android:id="@+id/helloTextView"
+        android:id="@+id/songName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="6dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="7dp"
         android:layout_toEndOf="@+id/imageView"
         android:fontFamily="@font/productsans_regular"
         android:letterSpacing="0.05"
@@ -36,13 +32,13 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/artisteName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/helloTextView"
+        android:layout_below="@id/songName"
         android:layout_marginStart="6dp"
         android:layout_toEndOf="@+id/imageView"
-        android:fontFamily="@font/gilroybold"
+        android:fontFamily="@font/bahnschrift"
         android:text="Line 20"
         android:textColor="#2174f1"
         android:textSize="13dp" />

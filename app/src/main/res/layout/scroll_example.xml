@@ -6,32 +6,6 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <TextView
-        android:id="@+id/helloTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="96dp"
-        android:fontFamily="@font/bahnschrift"
-        android:text="Hello!"
-        android:textColor="#707070"
-        android:textSize="17sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="568dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="163dp"
-        android:background="#000000"
-        android:padding="4dp"
-        android:scrollbars="vertical" />
-
     <ImageButton
         android:id="@+id/user_profile"
         android:layout_width="50dp"
@@ -45,19 +19,77 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/guest_login" />
 
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/chillhits"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="146dp"
+        android:onClick="handleSelectionForChillHits"
+        android:src="@drawable/chillhits"
+        app:riv_corner_radius="10dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="false"
+        app:riv_tile_mode="repeat" />
+
+    <TextView
+        android:id="@+id/helloTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="77dp"
+        android:fontFamily="@font/bahnschrift"
+        android:text="Hello!"
+        android:textColor="#707070"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="119dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/productsans_bold"
         android:text="Recommended For You"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/pophits"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="145dp"
+        android:layout_marginEnd="11dp"
+        android:onClick="handleSelectionForPopHits"
+        android:scaleType="fitXY"
+        android:src="@drawable/pophits"
+        app:riv_corner_radius="10dip"
+        app:riv_mutate_background="true"
+        app:riv_oval="false"
+        app:riv_tile_mode="repeat" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="407dp"
+        android:layout_height="382dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="349dp"
+        android:background="#000000"
+        android:padding="4dp"
+        android:scrollbars="vertical" />
 
 
 </RelativeLayout>

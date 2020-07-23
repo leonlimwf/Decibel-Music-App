@@ -19,8 +19,8 @@
         <activity android:name=".ProfileSettingsActivity" />
         <activity android:name=".StartScreenActivity" />
         <activity android:name=".ShareActivity" />
-        <activity android:name=".scrollexample" />
-        <activity android:name=".SplashScreenActivity">
+<!--        <activity android:name=".SplashScreenActivity">-->
+        <activity android:name=".scrollexample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

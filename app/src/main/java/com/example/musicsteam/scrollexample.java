@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,23 +12,44 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class scrollexample extends AppCompatActivity {
 
+
+    private SongCollection songCollection = new SongCollection();
+    Random r;
     private ArrayList<Song> mExampleList;
     private RecyclerView mRecyclerView;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton imagebutton;
     private TextView helloTextView2;
+    private ImageView randomImage;
+    private ImageView randomImage2;
 
+    Integer[] images = {
+            R.drawable.photograph_small,
+            R.drawable.billie_jean_small,
+            R.drawable.imusedtoit_small,
+            R.drawable.wedonttalkanymore_small,
+            R.drawable.boss_small,
+            R.drawable.salt_small,
+            R.drawable.saturdaynights_small,
+            R.drawable.symphony_small,
+            R.drawable.talkingtothemoon_small,
+            R.drawable.thriftshop_small,
+            R.drawable.wheredobrokenheartsgo_small
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scroll_example);
         createExampleList();
         buildRecyclerView();
-        imagebutton = (ImageButton) findViewById(R.id.user_profile);
+        r = new Random();
+        imagebutton = findViewById(R.id.user_profile);
         imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,7 +59,23 @@ public class scrollexample extends AppCompatActivity {
 
         helloTextView2 = findViewById(R.id.helloTextView2);
         final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
-        helloTextView2.setText("Hello " + credentials.accountName);
+        helloTextView2.setText("Hello, " + credentials.accountName);
+
+
+        int imageId = (int)(Math.random() * images.length);
+        int imageId2 = (int)(Math.random() * images.length);
+        if ((images[imageId]) == images[imageId2]){ //check to see if images are same
+            randomImage.setImageResource(images[imageId]); //if same, image 1 change to another
+            randomImage2.setImageResource(images[imageId2]); // and image 2 change to another
+        }
+        // if different, which is what i want
+        // the covert art get set
+        else {
+//            randomImage = findViewById(R.id.randomImage1);
+//            randomImage.setImageResource(images[imageId]);
+//            randomImage2 = findViewById(R.id.randomImage2);
+//            randomImage2.setImageResource(images[imageId2]);
+        }
     }
 
     public void openUserProfilePage () {
@@ -94,7 +132,7 @@ public class scrollexample extends AppCompatActivity {
                 "Nicki Minaj",
                 "ea8d3816651dea9f386bff2427ef6cae1500f18c?cid=2afe87a64b0042dabf51f37318616965",
                 3.45,
-                "sayso");
+                "sayso1");
 
         Song imusedtoit = new Song("S1008",
                 "I'm Used To It",
@@ -176,6 +214,47 @@ public class scrollexample extends AppCompatActivity {
 
         });
     }
+
+    public void handleSelectionForChillHits(View view) {
+        List<String> chillList = new ArrayList<String>();
+        chillList.add("S1001");
+        chillList.add("S1003");
+        chillList.add("S1005");
+        chillList.add("S1007");
+        chillList.add("S1009");
+        chillList.add("S10011");
+        chillList.add("S10013");
+
+        String resourceId = chillList.get(new Random().nextInt(chillList.size()));
+        Song selectedSong = songCollection.searchById(resourceId);
+        sendDataToActivity(selectedSong);
+    }
+
+    public void handleSelectionForPopHits(View view) {
+        List<String> popList = new ArrayList<String>();
+        popList.add("S1002");
+        popList.add("S1004");
+        popList.add("S1006");
+        popList.add("S1008");
+        popList.add("S10010");
+        popList.add("S10012");
+
+
+        String resourceId = popList.get(new Random().nextInt(popList.size()));
+        Song selectedSong = songCollection.searchById(resourceId);
+        sendDataToActivity(selectedSong);
+    }
+
+    public void sendDataToActivity(Song song) {
+        Intent nextPage = new Intent(this, PlaySongActivity.class);
+        nextPage.putExtra("id", song.getId());
+        nextPage.putExtra("title", song.getTitle());
+        nextPage.putExtra("artiste", song.getArtiste());
+        nextPage.putExtra("fileLink", song.getFileLink());
+        nextPage.putExtra("coverArt", song.getCoverArt());
+        startActivity(nextPage);
+    }
+
 
 
 
