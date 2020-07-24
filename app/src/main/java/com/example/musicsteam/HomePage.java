@@ -126,7 +126,7 @@ public class HomePage extends AppCompatActivity {
                 "Nicki Minaj",
                 "ea8d3816651dea9f386bff2427ef6cae1500f18c?cid=2afe87a64b0042dabf51f37318616965",
                 3.45,
-                "sayso1");
+                "sayso");
 
         Song imusedtoit = new Song("S1008",
                 "I'm Used To It",

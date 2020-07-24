@@ -7,14 +7,17 @@
     android:layout_margin="5dp"
     android:background="#000000">
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageView"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:padding="2dp"
-        android:scaleType="fitXY" />
+        app:riv_corner_radius="50dip"
+        android:scaleType="centerCrop"
+        app:riv_mutate_background="true"
+        app:riv_oval="false"/>
 
     <TextView
         android:id="@+id/songName"
