@@ -12,7 +12,7 @@ public class SongCollection {
     }
 
     public Song getNextShuffledSong(String currentSongId) {
-        this.currentSongIndex += 2;
+        this.currentSongIndex +=3 ;
         if (this.currentSongIndex > this.songs.size() - 1) {
             this.currentSongIndex = 1;
         }

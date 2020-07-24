@@ -84,7 +84,7 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/accountPicture"
         android:layout_width="73dp"
-        android:layout_height="71dp"
+        android:layout_height="73dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="132dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +92,7 @@
         app:riv_corner_radius="50dip"
         app:riv_mutate_background="true"
         app:riv_oval="false"
-        app:riv_tile_mode="repeat"
+        android:adjustViewBounds="true"
         app:srcCompat="@drawable/symphony" />
 
     <Button

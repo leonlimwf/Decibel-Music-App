@@ -36,7 +36,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
 
         final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
 
-        sharedPref = ProfileSettingsActivity.this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
         String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
 
         goBack2 = findViewById(R.id.goBack2);

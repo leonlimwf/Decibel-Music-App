@@ -1,9 +1,14 @@
 package com.example.musicsteam;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,11 +16,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class scrollexample extends AppCompatActivity {
+public class HomePage extends AppCompatActivity {
 
 
     private SongCollection songCollection = new SongCollection();
@@ -24,32 +30,35 @@ public class scrollexample extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton imagebutton;
+    private ImageView imagebutton;
     private TextView helloTextView2;
-    private ImageView randomImage;
-    private ImageView randomImage2;
+    private static final int PICK_IMAGE = 1;
+    Uri imageUri;
+    SharedPreferences sharedPref;
 
-    Integer[] images = {
-            R.drawable.photograph_small,
-            R.drawable.billie_jean_small,
-            R.drawable.imusedtoit_small,
-            R.drawable.wedonttalkanymore_small,
-            R.drawable.boss_small,
-            R.drawable.salt_small,
-            R.drawable.saturdaynights_small,
-            R.drawable.symphony_small,
-            R.drawable.talkingtothemoon_small,
-            R.drawable.thriftshop_small,
-            R.drawable.wheredobrokenheartsgo_small
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.scroll_example);
-        createExampleList();
+        setContentView(R.layout.activity_homepage);
+        createList();
         buildRecyclerView();
-        r = new Random();
+        LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials(); //getting my credentials from my loginscreenactivity
+
         imagebutton = findViewById(R.id.user_profile);
+        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
+        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
+        Log.e("Value", readProfilePicture+"");
+        if (readProfilePicture == null) {
+            imagebutton.setImageResource(credentials.accountPicture);
+        } else {
+            try {
+                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
+                imagebutton.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,25 +66,10 @@ public class scrollexample extends AppCompatActivity {
             }
         });
 
-        helloTextView2 = findViewById(R.id.helloTextView2);
-        final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
+        //setting up the hello, <user> text
+        helloTextView2 = findViewById(R.id.helloNameView);
         helloTextView2.setText("Hello, " + credentials.accountName);
 
-
-        int imageId = (int)(Math.random() * images.length);
-        int imageId2 = (int)(Math.random() * images.length);
-        if ((images[imageId]) == images[imageId2]){ //check to see if images are same
-            randomImage.setImageResource(images[imageId]); //if same, image 1 change to another
-            randomImage2.setImageResource(images[imageId2]); // and image 2 change to another
-        }
-        // if different, which is what i want
-        // the covert art get set
-        else {
-//            randomImage = findViewById(R.id.randomImage1);
-//            randomImage.setImageResource(images[imageId]);
-//            randomImage2 = findViewById(R.id.randomImage2);
-//            randomImage2.setImageResource(images[imageId2]);
-        }
     }
 
     public void openUserProfilePage () {
@@ -83,7 +77,7 @@ public class scrollexample extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void createExampleList() {
+    public void createList() {
         mExampleList = new ArrayList<>();
         Song theWayYouLookTonight = new Song("S1001",
                 "The Way You Look Tonight",
@@ -176,6 +170,7 @@ public class scrollexample extends AppCompatActivity {
                 3.63,
                 "talkingtothemoon");
 
+        //adding all the songs in
         this.mExampleList.add(theWayYouLookTonight);
         this.mExampleList.add(billieJean);
         this.mExampleList.add(photograph);
@@ -189,9 +184,9 @@ public class scrollexample extends AppCompatActivity {
         this.mExampleList.add(saturdaynights);
         this.mExampleList.add(boss);
         this.mExampleList.add(talkingtothemoon);
-
     }
 
+    //building my recyclerview
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -199,6 +194,8 @@ public class scrollexample extends AppCompatActivity {
         mAdapter = new ExampleAdapter(getApplicationContext() , mExampleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        //when i click a specific container, it get's the position and bring me to that song
         mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -215,6 +212,7 @@ public class scrollexample extends AppCompatActivity {
         });
     }
 
+    //function for my chill hits
     public void handleSelectionForChillHits(View view) {
         List<String> chillList = new ArrayList<String>();
         chillList.add("S1001");
@@ -230,6 +228,7 @@ public class scrollexample extends AppCompatActivity {
         sendDataToActivity(selectedSong);
     }
 
+    //function for my pop hits
     public void handleSelectionForPopHits(View view) {
         List<String> popList = new ArrayList<String>();
         popList.add("S1002");
@@ -239,12 +238,12 @@ public class scrollexample extends AppCompatActivity {
         popList.add("S10010");
         popList.add("S10012");
 
-
         String resourceId = popList.get(new Random().nextInt(popList.size()));
         Song selectedSong = songCollection.searchById(resourceId);
         sendDataToActivity(selectedSong);
     }
 
+    //putting all necessary song info into the playsongactivity so that the song will play
     public void sendDataToActivity(Song song) {
         Intent nextPage = new Intent(this, PlaySongActivity.class);
         nextPage.putExtra("id", song.getId());
@@ -256,6 +255,26 @@ public class scrollexample extends AppCompatActivity {
     }
 
 
+    //ensure that my profile pics is updated
+    //is called anytime an activity is hidden from view, e.g. if you start a new activity that hides it. onResume() is called when the activity that was hidden comes back to view on the screen
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
+        imagebutton = findViewById(R.id.user_profile);
+        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
+        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
+        if (readProfilePicture == null) {
+            imagebutton.setImageResource(credentials.accountPicture);
+        } else {
+            try {
+                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
+                imagebutton.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
 }
