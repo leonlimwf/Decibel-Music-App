@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,9 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HomePage extends AppCompatActivity {
+public class PlayingNowActivity extends AppCompatActivity {
 
-
+    MediaPlayer mediaplayer;
     private SongCollection songCollection = new SongCollection();
     Random r;
     private ArrayList<Song> mExampleList;
@@ -32,7 +33,9 @@ public class HomePage extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageView imagebutton;
     private TextView helloTextView2;
-    private ImageView searchBar;
+    private TextView playingnowsong;
+    private TextView playingnowartiste;
+
     private static final int PICK_IMAGE = 1;
     Uri imageUri;
     SharedPreferences sharedPref;
@@ -40,7 +43,7 @@ public class HomePage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
+        setContentView(R.layout.activity_playingnow);
         createList();
         buildRecyclerView();
         LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials(); //getting my credentials from my loginscreenactivity
@@ -71,19 +74,16 @@ public class HomePage extends AppCompatActivity {
         helloTextView2 = findViewById(R.id.helloNameView);
         helloTextView2.setText("Hello, " + credentials.accountName);
 
-        searchBar = findViewById(R.id.searchbarview);
-        searchBar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToSearchActivity();
-            }
-        });
-
+        playingnowsong = findViewById(R.id.playingnowsong);
+        playingnowartiste = findViewById(R.id.playingnowartiste);
     }
 
-    private void goToSearchActivity() {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
+    public void onClick(View view) {
+        if (view == imagebutton) {
+            //start the service here
+        } else if (view == imagebutton) {
+            //stop the service here
+        }
     }
 
     public void openUserProfilePage () {

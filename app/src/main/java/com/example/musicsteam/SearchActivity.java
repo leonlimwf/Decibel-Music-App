@@ -1,97 +1,67 @@
 package com.example.musicsteam;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
-public class HomePage extends AppCompatActivity {
-
-
-    private SongCollection songCollection = new SongCollection();
-    Random r;
+public class SearchActivity extends AppCompatActivity {
     private ArrayList<Song> mExampleList;
     private RecyclerView mRecyclerView;
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageView imagebutton;
-    private TextView helloTextView2;
-    private ImageView searchBar;
-    private static final int PICK_IMAGE = 1;
-    Uri imageUri;
-    SharedPreferences sharedPref;
-
+    private ImageButton goBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homepage);
-        createList();
+        setContentView(R.layout.activity_search);
+        createExampleList();
         buildRecyclerView();
-        LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials(); //getting my credentials from my loginscreenactivity
-
-        imagebutton = findViewById(R.id.user_profile);
-        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
-        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
-        Log.e("Value", readProfilePicture+"");
-        if (readProfilePicture == null) {
-            imagebutton.setImageResource(credentials.accountPicture);
-        } else {
-            try {
-                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
-                imagebutton.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        imagebutton.setOnClickListener(new View.OnClickListener() {
+        EditText editText = findViewById(R.id.edittext);
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view) {
-                openUserProfilePage();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                filter(s.toString());
             }
         });
 
-        //setting up the hello, <user> text
-        helloTextView2 = findViewById(R.id.helloNameView);
-        helloTextView2.setText("Hello, " + credentials.accountName);
-
-        searchBar = findViewById(R.id.searchbarview);
-        searchBar.setOnClickListener(new View.OnClickListener() {
+        goBack = findViewById(R.id.goBack);
+        goBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToSearchActivity();
+                onBackPressed();
             }
         });
-
     }
 
-    private void goToSearchActivity() {
-        Intent intent = new Intent(this, SearchActivity.class);
-        startActivity(intent);
-    }
 
-    public void openUserProfilePage () {
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
 
-    public void createList() {
+
+    private void filter(String text) {
+        ArrayList<Song> filteredList = new ArrayList<>();
+        for (Song item : mExampleList) {
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase()))  {
+                filteredList.add(item);
+            }
+        }
+        mAdapter.filterList(filteredList);
+    }
+    public void createExampleList() {
         mExampleList = new ArrayList<>();
         Song theWayYouLookTonight = new Song("S1001",
                 "The Way You Look Tonight",
@@ -184,7 +154,6 @@ public class HomePage extends AppCompatActivity {
                 3.63,
                 "talkingtothemoon");
 
-        //adding all the songs in
         this.mExampleList.add(theWayYouLookTonight);
         this.mExampleList.add(billieJean);
         this.mExampleList.add(photograph);
@@ -198,14 +167,14 @@ public class HomePage extends AppCompatActivity {
         this.mExampleList.add(saturdaynights);
         this.mExampleList.add(boss);
         this.mExampleList.add(talkingtothemoon);
+
     }
 
-    //building my recyclerview
-    public void buildRecyclerView() {
+    private void buildRecyclerView () {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
-        mAdapter = new ExampleAdapter(getApplicationContext() , mExampleList);
+        mAdapter = new ExampleAdapter(getApplicationContext(), mExampleList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -225,70 +194,4 @@ public class HomePage extends AppCompatActivity {
 
         });
     }
-
-    //function for my chill hits
-    public void handleSelectionForChillHits(View view) {
-        List<String> chillList = new ArrayList<String>();
-        chillList.add("S1001");
-        chillList.add("S1003");
-        chillList.add("S1005");
-        chillList.add("S1007");
-        chillList.add("S1009");
-        chillList.add("S10011");
-        chillList.add("S10013");
-
-        String resourceId = chillList.get(new Random().nextInt(chillList.size()));
-        Song selectedSong = songCollection.searchById(resourceId);
-        sendDataToActivity(selectedSong);
-    }
-
-    //function for my pop hits
-    public void handleSelectionForPopHits(View view) {
-        List<String> popList = new ArrayList<String>();
-        popList.add("S1002");
-        popList.add("S1004");
-        popList.add("S1006");
-        popList.add("S1008");
-        popList.add("S10010");
-        popList.add("S10012");
-
-        String resourceId = popList.get(new Random().nextInt(popList.size()));
-        Song selectedSong = songCollection.searchById(resourceId);
-        sendDataToActivity(selectedSong);
-    }
-
-    //putting all necessary song info into the playsongactivity so that the song will play
-    public void sendDataToActivity(Song song) {
-        Intent nextPage = new Intent(this, PlaySongActivity.class);
-        nextPage.putExtra("id", song.getId());
-        nextPage.putExtra("title", song.getTitle());
-        nextPage.putExtra("artiste", song.getArtiste());
-        nextPage.putExtra("fileLink", song.getFileLink());
-        nextPage.putExtra("coverArt", song.getCoverArt());
-        startActivity(nextPage);
-    }
-
-
-    //ensure that my profile pics is updated
-    //is called anytime an activity is hidden from view, e.g. if you start a new activity that hides it. onResume() is called when the activity that was hidden comes back to view on the screen
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
-        imagebutton = findViewById(R.id.user_profile);
-        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
-        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
-        if (readProfilePicture == null) {
-            imagebutton.setImageResource(credentials.accountPicture);
-        } else {
-            try {
-                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
-                imagebutton.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
 }

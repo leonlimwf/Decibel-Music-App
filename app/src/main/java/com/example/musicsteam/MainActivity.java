@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openUserProfilePage () {
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, PlayingNowActivity.class);
         startActivity(intent);
     }
 

@@ -74,4 +74,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
     public int getItemCount() {
         return mExampleList.size();
     }
+
+    public void filterList(ArrayList<Song> filteredList) {
+        mExampleList = filteredList;
+        notifyDataSetChanged();
+    }
 }
