@@ -154,6 +154,13 @@ public class SongCollection {
                 "97de5b6d487f491cddfb427c1612f45f5b3c9388?cid=2afe87a64b0042dabf51f37318616965",
                 3.63,
                 "talkingtothemoon");
+
+        Song playdate = new Song("S10014",
+                "Playdate",
+                "Melanie Martinez",
+                "72adc548b3c77bd00ef8d0ac56846121b63da6e8?cid=2afe87a64b0042dabf51f37318616965",
+                3.00,
+                "playdate");
         this.songs.add(theWayYouLookTonight);
         this.songs.add(billieJean);
         this.songs.add(photograph);
@@ -167,6 +174,7 @@ public class SongCollection {
         this.songs.add(saturdaynights);
         this.songs.add(boss);
         this.songs.add(talkingtothemoon);
+        this.songs.add(playdate);
 //        Collections.shuffle(songs2);
 //        for(Song str: songs2){
 //            Log.e("LIST", String.valueOf(str));

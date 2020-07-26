@@ -184,6 +184,13 @@ public class PlayingNowActivity extends AppCompatActivity {
                 3.63,
                 "talkingtothemoon");
 
+        Song playdate = new Song("S10014",
+                "Playdate",
+                "Melanie Martinez",
+                "72adc548b3c77bd00ef8d0ac56846121b63da6e8?cid=2afe87a64b0042dabf51f37318616965",
+                3.00,
+                "playdate");
+
         //adding all the songs in
         this.mExampleList.add(theWayYouLookTonight);
         this.mExampleList.add(billieJean);
@@ -198,6 +205,7 @@ public class PlayingNowActivity extends AppCompatActivity {
         this.mExampleList.add(saturdaynights);
         this.mExampleList.add(boss);
         this.mExampleList.add(talkingtothemoon);
+        this.mExampleList.add(playdate);
     }
 
     //building my recyclerview

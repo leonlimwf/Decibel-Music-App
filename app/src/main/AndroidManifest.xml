@@ -20,6 +20,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ProfileSettingsActivity" />
         <activity android:name=".StartScreenActivity" />
+        <activity android:name=".ShareActivity" />
 <!--        <activity android:name=".HomePage" />-->
         <activity android:name=".HomePage">
             <intent-filter>
