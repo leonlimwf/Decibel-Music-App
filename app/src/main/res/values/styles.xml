@@ -6,7 +6,10 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        
+        <item name="android:popupBackground">#272727</item>
+        <item name="android:itemBackground">#242424</item>
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <item name="android:fontFamily">@font/productsans_regular</item>
     </style>
 
 </resources>

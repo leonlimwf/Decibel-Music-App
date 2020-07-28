@@ -11,6 +11,10 @@ public class SongCollection {
         prepareSongs();
     }
 
+    public ArrayList<Song> getSongs() {
+        return this.songs;
+    }
+
     public Song getNextShuffledSong(String currentSongId) {
         this.currentSongIndex +=3 ;
         if (this.currentSongIndex > this.songs.size() - 1) {

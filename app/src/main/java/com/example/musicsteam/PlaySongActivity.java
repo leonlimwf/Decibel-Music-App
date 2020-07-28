@@ -57,6 +57,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     ImageButton btnPrevious;
     ImageButton btnLoop;
     ImageButton btnShuffle;
+    ImageView goBack;
     private Handler mHandler;
 
     private boolean isLoop = false;
@@ -76,11 +77,20 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         btnPrevious = findViewById(R.id.btnPrevious);
         btnLoop = findViewById(R.id.loopButton);
         btnShuffle = findViewById(R.id.shuffleButton);
-
+        goBack = findViewById(R.id.goBack);
         songCollection = new SongCollection();
         mHandler = new Handler();
         retrieveData();
         displaySong(title, artiste, coverArt);
+
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
 
         player = new MediaPlayer();
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -365,7 +375,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 ClipData clip = ClipData.newPlainText("Share Link",shareLink );
                 clipboard.setPrimaryClip(clip);
                 return true;
-            case R.id.item3:
+            case R.id.like:
                 Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.item4:

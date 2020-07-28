@@ -21,6 +21,8 @@ public class SearchActivity extends AppCompatActivity {
     private ExampleAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ImageButton goBack;
+    ArrayList<Song> filteredList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,14 +56,19 @@ public class SearchActivity extends AppCompatActivity {
 
 
     private void filter(String text) {
-        ArrayList<Song> filteredList = new ArrayList<>();
+        filteredList.clear();
         for (Song item : mExampleList) {
-            if (item.getTitle().toLowerCase().contains(text.toLowerCase()))  {
+            if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
+                filteredList.add(item);
+            }
+
+            else if (item.getArtiste().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }
         }
         mAdapter.filterList(filteredList);
     }
+
     public void createExampleList() {
         mExampleList = new ArrayList<>();
         Song theWayYouLookTonight = new Song("S1001",
@@ -191,7 +198,7 @@ public class SearchActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new ExampleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Song item = mExampleList.get(position);
+                Song item = filteredList.get(position);
                 Log.e("position", String.valueOf(position));
                 Intent nextPage = new Intent(getApplicationContext(), PlaySongActivity.class);
                 nextPage.putExtra("id", item.getId());

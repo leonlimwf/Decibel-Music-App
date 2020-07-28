@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -25,6 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton logoutBtn;
     private ImageView accountPicture;
     private Button editBtn;
+    private TextView numberofsongs;
+    private TextView songsLengthDuration;
     private static final int PICK_IMAGE = 1;
     Uri imageUri;
     SharedPreferences sharedPref;
@@ -48,7 +51,6 @@ public class ProfileActivity extends AppCompatActivity {
         accountName = findViewById(R.id.accountName);
         accountName.setText(credentials.accountName);
 
-
         logoutBtn = findViewById(R.id.logoutBtn);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +58,22 @@ public class ProfileActivity extends AppCompatActivity {
                 logout();
             }
         });
+
+        SongCollection songCollection = new SongCollection();
+        ArrayList<Song> songs = songCollection.getSongs();
+
+
+        int numberOfSongs = songs.size();
+        double totalSongsLength = 0.0;
+
+        for (Song item : songs) {
+            totalSongsLength += item.getSongLength();
+        }
+        numberofsongs = findViewById(R.id.numberOfSongs);
+        numberofsongs.setText(numberOfSongs+"");
+
+        songsLengthDuration = findViewById(R.id.totalSongsLength);
+        songsLengthDuration.setText(String.format("%.2f", totalSongsLength));
 
         accountPicture = findViewById(R.id.accountPicture);
         sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);

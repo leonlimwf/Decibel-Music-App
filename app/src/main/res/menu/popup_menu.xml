@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/settings"
-        android:title="Settings" />
-    <item
-        android:id="@+id/share"
-        android:title="Share" />
-    <item
-        android:id="@+id/item3"
-        android:title="Item 3" />
-    <item
-        android:id="@+id/item4"
-        android:title="Item 4" />
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="More">
+        <menu>
+            <item
+                android:id="@+id/settings"
+                android:icon="@drawable/settings"
+                app:showAsAction="always"
+                android:title="Settings" />
+            <item
+                android:id="@+id/share"
+                android:icon="@drawable/share"
+                android:tooltipText="#FFFFFF"
+                app:showAsAction="always"
+                android:title="Share" />
+            <item
+                android:id="@+id/like"
+                android:icon="@drawable/google_login"
+                app:showAsAction="always"
+                android:title="Like" />
+            <item
+                android:id="@+id/item4"
+                android:icon="@drawable/google_login"
+                app:showAsAction="always"
+                android:title="Settings" />
+        </menu>
+    </item>
+
+
 
 </menu>

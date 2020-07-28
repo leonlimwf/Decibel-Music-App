@@ -8,18 +8,17 @@
     android:background="#000000"
     tools:context=".PlaySongActivity">
 
-    <!--    <ImageView-->
-    <!--        android:id="@+id/imgCoverArt"-->
-    <!--        android:layout_width="347dp"-->
-    <!--        android:layout_height="240dp"-->
-    <!--        android:layout_marginTop="36dp"-->
-    <!--        android:scaleType="fitCenter"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintHorizontal_bias="0.491"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        android:background="@drawable/round_outline"-->
-    <!--        app:srcCompat="@drawable/home" />-->
+    <ImageButton
+        android:id="@+id/goBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="26dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/goback" />
+
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imgCoverArt"
         android:layout_width="280dp"
@@ -179,7 +178,7 @@
         android:onClick="showPopup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="29dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
