@@ -17,9 +17,9 @@
                 android:title="Share" />
             <item
                 android:id="@+id/like"
-                android:icon="@drawable/google_login"
-                app:showAsAction="always"
-                android:title="Like" />
+                android:icon="@drawable/like"
+                android:title="Like"
+                app:showAsAction="always" />
             <item
                 android:id="@+id/item4"
                 android:icon="@drawable/google_login"

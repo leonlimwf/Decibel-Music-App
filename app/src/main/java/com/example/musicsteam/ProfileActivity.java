@@ -24,6 +24,7 @@ public class ProfileActivity extends AppCompatActivity {
     private ImageButton gobackBtn;
     private TextView accountName;
     private ImageButton logoutBtn;
+    private ImageButton likedSongsBtn;
     private ImageView accountPicture;
     private Button editBtn;
     private TextView numberofsongs;
@@ -51,11 +52,19 @@ public class ProfileActivity extends AppCompatActivity {
         accountName = findViewById(R.id.accountName);
         accountName.setText(credentials.accountName);
 
-        logoutBtn = findViewById(R.id.logoutBtn);
+        logoutBtn = findViewById(R.id.logout);
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 logout();
+            }
+        });
+
+        likedSongsBtn = findViewById(R.id.likedSongsBtn);
+        likedSongsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLikedSongActivity();
             }
         });
 
@@ -105,6 +114,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void goToProfileSettings() {
         Intent intent = new Intent (this, ProfileSettingsActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLikedSongActivity() {
+        Intent intent = new Intent (this, LikedSongActivity.class);
         startActivity(intent);
     }
 

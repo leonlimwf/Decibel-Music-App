@@ -4,12 +4,14 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
@@ -25,11 +27,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.musicsteam.util.AppUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private static final String BASE_URL = "https://p.scdn.co/mp3-preview/";
+    private static final String SHARED_PREFS = "sharedPrefs";
     private String songId = "";
     private String title = "";
     private String artiste = "";
@@ -49,6 +54,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     private ImageButton btnPlayPause = null; //empty button
 
     private SongCollection songCollection;
+    Song currentSong;
     TextView txtCurrentTime;
     TextView txtTitle;
     TextView txtArtiste;
@@ -100,15 +106,11 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 if (isLoop) {
                     player.start();
 
-                }
-
-                else if (isShuffle) {
+                } else if (isShuffle) {
                     Random rand = new Random();
                     int shuffleSongIndex = rand.nextInt((songCollection.songs.size() - 1) - 0 + 1) + 0;
                     playShuffle(shuffleSongIndex);
-                }
-
-                else {
+                } else {
                     playNext();
                     playSong(true);
                 }
@@ -126,9 +128,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                     isLoop = false;
                     Log.e("btnLoop", "LOOP : OFF");
                     btnShuffle.setEnabled(true);
-                }
-
-                else {
+                } else {
                     btnLoop.setImageResource(R.drawable.loop_on);
                     isLoop = true;
                     Log.e("btnLoop", "LOOP : ON");
@@ -140,14 +140,12 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isShuffle == true) {
+                if (isShuffle) {
                     btnShuffle.setImageResource(R.drawable.shuffle_off); //i clicked a SHUFFLE:ON button, it turns off
                     isShuffle = false;
                     Log.e("isShuffle", "SHUFFLE : OFF");
                     btnLoop.setEnabled(true);
-                }
-
-                else {
+                } else {
                     btnShuffle.setImageResource(R.drawable.shuffle_on);
                     isShuffle = true;
                     Log.e("isShuffle", "SHUFFLE : ON");
@@ -246,7 +244,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         artiste = songData.getString("artiste");
         fileLink = songData.getString("fileLink");
         coverArt = songData.getString("coverArt");
-        songCollection.searchById(songId);
+        currentSong = songCollection.searchById(songId);
         url = BASE_URL + fileLink;
         Log.e("URL", url);
     }
@@ -316,38 +314,37 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     };
 
     public void playPrevious() {
-        Song prevSong = songCollection.getPrevSong(songId);
-        if (prevSong == null) {
+        currentSong = songCollection.getPrevSong(songId);
+        if (currentSong == null) {
             Toast.makeText(PlaySongActivity.this, "Unable to get previous song", Toast.LENGTH_LONG);
             return;
         }
 
-        setSongDetails(prevSong);
+        setSongDetails(currentSong);
         boolean shouldPlayNext = player.isPlaying();
         playSong(shouldPlayNext);
     }
 
     public void playNext() {
-        Song nextSong = songCollection.getNextSong(songId);
-        if (nextSong == null) {
+        currentSong = songCollection.getNextSong(songId);
+        if (currentSong == null) {
             Toast.makeText(PlaySongActivity.this, "Unable to get next song", Toast.LENGTH_LONG);
             return;
         }
 
-        setSongDetails(nextSong);
+        setSongDetails(currentSong);
         boolean shouldPlayNext = player.isPlaying();
         playSong(shouldPlayNext);
     }
 
     public void playShuffle(int shuffleSongIndex) {
-        Song nextShuffledSong = songCollection.getNextShuffledSong(songId);
-        if (nextShuffledSong == null) {
+        currentSong = songCollection.getNextShuffledSong(songId);
+        if (currentSong == null) {
             Toast.makeText(PlaySongActivity.this, "Unable to get next shuffled song", Toast.LENGTH_LONG);
             return;
         }
-        setSongDetails(nextShuffledSong);
-        boolean shouldPlayNext = player.isPlaying();
-        if (player.isPlaying() == false) {
+        setSongDetails(currentSong);
+        if (!player.isPlaying()) {
             playSong(true);
         }
     }
@@ -356,6 +353,17 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
         popup.inflate(R.menu.popup_menu);
+        Menu menuOpts = popup.getMenu();
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        String songID = sharedPreferences.getString("likedSongID", null);
+        if (songID != null) {
+            String[] songIDlist = songID.split(",");
+            ArrayList<String> list = new ArrayList<>(Arrays.asList(songIDlist));
+            if (list.contains(currentSong.getId())) {
+                menuOpts.findItem(R.id.like).setTitle("Unlike").setIcon(R.drawable.unlike);
+            }
+        }
+
         popup.show();
     }
 
@@ -372,12 +380,48 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 String baseURL = "https://p.scdn.co/mp3-preview/";
                 String shareLink = baseURL + fileLink;
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText("Share Link",shareLink );
+                ClipData clip = ClipData.newPlainText("Share Link", shareLink);
                 clipboard.setPrimaryClip(clip);
                 return true;
             case R.id.like:
-                Toast.makeText(this, "Item 3 clicked", Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                String songID = sharedPreferences.getString("likedSongID", null);
+                if (songID == null) {
+                    editor.putString("likedSongID", currentSong.getId());
+                    String currentSongTitle = currentSong.getTitle();
+                    String message = currentSongTitle + " have been added to the Liked playlist.";
+                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                    editor.apply();
+                } else {
+                    String[] songIDlist = songID.split(",");
+                    ArrayList<String> list = new ArrayList<>(Arrays.asList(songIDlist));
+                    if (!list.contains(currentSong.getId())) {
+                        songID += "," + currentSong.getId();
+                        String currentSongTitle = currentSong.getTitle();
+                        String message = currentSongTitle + " have been added to the Liked playlist";
+                        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+                        editor.putString("likedSongID", songID);
+                        editor.apply();
+                    } else {
+                        int index = list.indexOf(currentSong.getId());
+                        list.remove(index);
+                        String newSongsID = "";
+                        for (String i : list) {
+                            if (i != null && i.length() > 0) {
+                                Log.e("I IS", i.length() + ":" + i);
+                                newSongsID += i + ",";
+                            }
+                        }
+
+                        Log.e("newSongsID", newSongsID);
+                        editor.putString("likedSongID", newSongsID);
+                        editor.apply();
+                        Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
+                    }
+                }
                 return true;
+
             case R.id.item4:
                 Toast.makeText(this, "Item 4 clicked", Toast.LENGTH_SHORT).show();
                 return true;
@@ -385,6 +429,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 return false;
         }
     }
+
 
     private void setSongDetails(Song song) {
         musicPosition = 0;
@@ -403,4 +448,5 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         int imageId = AppUtil.getImageIdFromDrawable(this, coverArt);
         iCoverArt.setImageResource(imageId);
     }
+
 }
