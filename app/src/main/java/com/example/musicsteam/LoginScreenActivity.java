@@ -99,6 +99,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         });
     }
 
+
+
     /* Validate the credentials */
     private boolean validate(String accountName, String userPassword)
     {

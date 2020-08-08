@@ -390,7 +390,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 if (songID == null) {
                     editor.putString("likedSongID", currentSong.getId());
                     String currentSongTitle = currentSong.getTitle();
-                    String message = currentSongTitle + " have been added to the Liked playlist.";
+                    String message = currentSongTitle + " have been added to the Liked Playlist.";
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                     editor.apply();
                 } else {
@@ -399,7 +399,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                     if (!list.contains(currentSong.getId())) {
                         songID += "," + currentSong.getId();
                         String currentSongTitle = currentSong.getTitle();
-                        String message = currentSongTitle + " have been added to the Liked playlist";
+                        String message = currentSongTitle + " have been added to the Liked Playlist";
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                         editor.putString("likedSongID", songID);
                         editor.apply();
@@ -417,7 +417,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                         Log.e("newSongsID", newSongsID);
                         editor.putString("likedSongID", newSongsID);
                         editor.apply();
-                        Toast.makeText(this, "Removed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Removed from Liked Playlist", Toast.LENGTH_SHORT).show();
                     }
                 }
                 return true;

@@ -34,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:autofillHints=""
+        android:imeOptions="actionDone"
         android:background="@drawable/login_buttondesign"
         android:ems="10"
         android:fontFamily="@font/productsans_bold"

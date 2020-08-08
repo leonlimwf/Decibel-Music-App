@@ -64,27 +64,6 @@ public class LikedSongActivity extends AppCompatActivity {
         }
     }
 
-
-//    private void filter(String text) {
-//        mExampleList.clear();
-//        for (likedSong : newLikedSongData) {
-//            if (likedSong.getId().contains()) {
-//                mExampleList.add(likedSong);
-//            }
-//
-//            else if (item.getArtiste().toLowerCase().contains(text.toLowerCase())) {
-//                filteredList.add(item);
-//            }
-//        }
-//        mAdapter.filterList(filteredList);
-//    }
-
-    private void insertItem(String songID) {
-        for (Song item : newLikedSongData) {
-            Log.e("item", String.valueOf(item));
-        }
-    }
-
     private void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);

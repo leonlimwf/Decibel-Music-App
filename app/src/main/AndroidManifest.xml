@@ -14,16 +14,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LikedSongActivity"></activity>
-        <activity android:name=".util.likedSongs" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".PlaySongActivity" />
         <activity android:name=".LoginScreenActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".ProfileSettingsActivity" />
         <activity android:name=".StartScreenActivity" />
-        <activity android:name=".ShareActivity" /> <!-- <activity android:name=".HomePage" /> -->
-        <activity android:name=".HomePage">
+        <activity android:name=".ShareActivity" />
+        <activity android:name=".HomePage" />
+        <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

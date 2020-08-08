@@ -35,7 +35,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
         android:background="#000000"
-
+        android:drawableStart="@drawable/searchlogo"
+        android:drawablePadding="15dp"
         android:fontFamily="@font/productsans_bold"
         android:textAlignment="viewStart"
         android:textColor="#FFFFFF"
