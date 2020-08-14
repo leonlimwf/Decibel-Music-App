@@ -45,6 +45,7 @@ public class LikedSongActivity extends AppCompatActivity {
 
 
     private void loadData() {
+        newLikedSongData.clear();
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String readSongData = sharedPreferences.getString("likedSongID", null);
         Log.e("readsongdata", readSongData);
@@ -89,5 +90,10 @@ public class LikedSongActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+        mAdapter.notifyDataSetChanged();
+    }
 }

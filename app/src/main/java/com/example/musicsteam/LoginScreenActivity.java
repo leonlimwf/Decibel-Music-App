@@ -17,11 +17,7 @@ public class LoginScreenActivity extends AppCompatActivity {
     private EditText ePassword;
     private TextView eAttemptsInfo;
     private Button eLogin;
-
-
-
     private int counter = 3;
-    public boolean guestMode = true;
 
     String userAccountName = "";
     String userPassword = "";
@@ -57,7 +53,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                 /* Check if the user inputs are empty */
                 if(userAccountName.isEmpty() || userPassword.isEmpty()) {
                     /* Display a message toast to user to enter the details */
-                    Toast.makeText(LoginScreenActivity.this, "Please Enter Your Email & Password!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginScreenActivity.this, "Please Enter Your Account Name & Password!", Toast.LENGTH_LONG).show();
 
                 }else {
 
@@ -89,7 +85,6 @@ public class LoginScreenActivity extends AppCompatActivity {
                     else {
 
                         /* Allow the user in to your app by going into the next activity */
-                        guestMode = false;
                         startActivity(new Intent(LoginScreenActivity.this, HomePage.class));
                         finish();
                     }

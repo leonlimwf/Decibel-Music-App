@@ -1,6 +1,7 @@
 package com.example.musicsteam;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class SongCollection {
     ArrayList<Song> songs = new ArrayList<>();
@@ -20,7 +21,11 @@ public class SongCollection {
     }
 
     public Song getNextShuffledSong(String currentSongId) {
-        this.currentSongIndex +=3 ;
+        Random rand = new Random();
+
+// Obtain a number between [0 - 49].
+        int n = rand.nextInt(5);
+        this.currentSongIndex += n;
         if (this.currentSongIndex > this.songs.size() - 1) {
             this.currentSongIndex = 1;
         }
@@ -38,15 +43,6 @@ public class SongCollection {
     }
 
     public Song getNextSong(String currentSongId) {
-//        Song song = null;
-//        for (int index = 0; index < songs.length; index++) {
-//            String tempSongId = songs[index].getId();
-//            if (tempSongId.equals(currentSongId) && (index < songs.length - 1)) {
-//                song = songs[index + 1];
-//                break;
-//            }
-//        }
-//        return song;
 
         this.currentSongIndex += 1;
         if (this.currentSongIndex > this.songs.size() - 1) {
@@ -169,6 +165,93 @@ public class SongCollection {
                 "72adc548b3c77bd00ef8d0ac56846121b63da6e8?cid=2afe87a64b0042dabf51f37318616965",
                 3.00,
                 "playdate");
+
+        Song healtheworld = new Song("S10015",
+                "Heal the World",
+                "Michael Jackson",
+                "12261e2c16b7eb17508fb25a411691380893151d?cid=2afe87a64b0042dabf51f37318616965",
+                6.41,
+                "healtheworld");
+
+        Song supermarketflowers = new Song("S10016",
+                "Supermarket Flower",
+                "Ed Sheeran",
+                "44c5f2f0aba08060bb8f50273931a68e8eea7d34?cid=2afe87a64b0042dabf51f37318616965",
+                3.69,
+                "supermarketflowers");
+
+        Song onecallaway = new Song("S10017",
+                "One Call Away",
+                "Charlie Puth",
+                "0c4bed645d246486c6b16fe0ac48d418259edecf?cid=2afe87a64b0042dabf51f37318616965",
+                3.24,
+                "onecallaway");
+
+        Song stealmygirl = new Song("S10018",
+                "Steal My Girl",
+                "One Direction",
+                "2be03a39526b79e665a488afb5f87257a7977dce?cid=2afe87a64b0042dabf51f37318616965",
+                3.8,
+                "stealmygirl");
+
+        Song castleonthehill = new Song("S10019",
+                "Castle on the Hill",
+                "Ed Sheeran",
+                "beb4ed48cca5d2a792e877c7efe92d54046eac67?cid=2afe87a64b0042dabf51f37318616965",
+                4.35,
+                "castleonthehill");
+
+        Song baby = new Song("S10020",
+                "Baby",
+                "Clean Bandit",
+                "90fb466f9dcd22ac1ba85ceb70761d6c396f4f5c?cid=2afe87a64b0042dabf51f37318616965",
+                3.42,
+                "baby");
+
+        Song deathbed = new Song("S10021",
+                "Death Bed",
+                "Powfu",
+                "5bc9716d7c7b66ebe07a641265cd3124f8b9e16c?cid=2afe87a64b0042dabf51f37318616965",
+                2.89,
+                "deathbed");
+
+        Song soami = new Song("S10022",
+                "So Am I",
+                "Ava Max",
+                "8683916dfa16b85a9dff1bf743e629790a2efe85?cid=2afe87a64b0042dabf51f37318616965",
+                3.05,
+                "soami");
+
+        Song location = new Song("S10023",
+                "Location",
+                "Khalid",
+                "d50dfb78af7cb29f6363ba1a0d2cbdd707ee137c?cid=2afe87a64b0042dabf51f37318616965",
+                3.65,
+                "locationmusic");
+
+        Song sweetbutpsycho = new Song("S10024",
+                "Sweet But Psycho",
+                "Ava Max",
+                "9772598a67666a9b7184926c59fe15b9574c7e46?cid=2afe87a64b0042dabf51f37318616965",
+                3.12,
+                "sweetbutpsycho");
+
+        Song versaceonthefloor = new Song("S10025",
+                "Versace On The Floor",
+                "Bruno Mars",
+                "9487b9c88fabca3470a6ec629d3d61965082bc50?cid=2afe87a64b0042dabf51f37318616965",
+                4.35,
+                "versaceonthefloor");
+
+        Song crybaby = new Song("S10026",
+                "Cry Baby",
+                "Melanie Martinez",
+                "c305bda2d252631923a0f4281078db6e28e9fc83?cid=2afe87a64b0042dabf51f37318616965",
+                4.35,
+                "crybaby");
+
+
+
         this.songs.add(theWayYouLookTonight);
         this.songs.add(billieJean);
         this.songs.add(photograph);
@@ -183,10 +266,18 @@ public class SongCollection {
         this.songs.add(boss);
         this.songs.add(talkingtothemoon);
         this.songs.add(playdate);
-//        Collections.shuffle(songs2);
-//        for(Song str: songs2){
-//            Log.e("LIST", String.valueOf(str));
-//        }
+        this.songs.add(healtheworld);
+        this.songs.add(supermarketflowers);
+        this.songs.add(onecallaway);
+        this.songs.add(stealmygirl);
+        this.songs.add(castleonthehill);
+        this.songs.add(baby);
+        this.songs.add(deathbed);
+        this.songs.add(soami);
+        this.songs.add(location);
+        this.songs.add(sweetbutpsycho);
+        this.songs.add(versaceonthefloor);
+        this.songs.add(crybaby);
 
     }
 }

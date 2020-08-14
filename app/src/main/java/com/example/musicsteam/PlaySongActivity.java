@@ -29,7 +29,6 @@ import com.example.musicsteam.util.AppUtil;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
@@ -69,6 +68,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     private boolean isLoop = false;
     private boolean isShuffle = false;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,9 +107,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                     player.start();
 
                 } else if (isShuffle) {
-                    Random rand = new Random();
-                    int shuffleSongIndex = rand.nextInt((songCollection.songs.size() - 1) - 0 + 1) + 0;
-                    playShuffle(shuffleSongIndex);
+                    playShuffle();
                 } else {
                     playNext();
                     playSong(true);
@@ -337,7 +335,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         playSong(shouldPlayNext);
     }
 
-    public void playShuffle(int shuffleSongIndex) {
+    public void playShuffle() {
         currentSong = songCollection.getNextShuffledSong(songId);
         if (currentSong == null) {
             Toast.makeText(PlaySongActivity.this, "Unable to get next shuffled song", Toast.LENGTH_LONG);
@@ -371,8 +369,8 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings:
-                Intent goToProfileSettings = new Intent(this, ProfileSettingsActivity.class);
-                startActivity(goToProfileSettings);
+                Intent goToProfileActivity = new Intent(this, ProfileActivity.class);
+                startActivity(goToProfileActivity);
                 return true;
             case R.id.share:
                 Intent goToSharePage = new Intent(this, ShareActivity.class);
@@ -422,9 +420,14 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 }
                 return true;
 
-            case R.id.item4:
-                Toast.makeText(this, "Item 4 clicked", Toast.LENGTH_SHORT).show();
-                return true;
+                case R.id.viewartiste:
+                    Intent nextPage = new Intent(this, artistProfile.class);
+                    nextPage.putExtra("id", currentSong.getId());
+                    nextPage.putExtra("title", currentSong.getTitle());
+                    nextPage.putExtra("artiste", currentSong.getArtiste());
+                    nextPage.putExtra("fileLink", currentSong.getFileLink());
+                    nextPage.putExtra("coverArt", currentSong.getCoverArt());
+                    startActivity(nextPage);
             default:
                 return false;
         }
