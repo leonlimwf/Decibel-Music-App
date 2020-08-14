@@ -86,7 +86,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         goBack = findViewById(R.id.goBack);
         songCollection = new SongCollection();
         mHandler = new Handler();
-        retrieveData();
+        retrieveData(); //getting all my song data, bundle , getstring of ID etc
         displaySong(title, artiste, coverArt);
 
 
@@ -98,24 +98,35 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         });
 
 
-        player = new MediaPlayer();
+        player = ((MainApplication) this.getApplication()).getMediaPlayer(); //getApplication simply means, getting the application class i created
+        if (player == null) {
+            ((MainApplication) this.getApplication()).setMediaPlayer(new MediaPlayer()); //setting my mediaplayer that i did in my mainapplication.java
+            player = ((MainApplication) this.getApplication()).getMediaPlayer(); //getting it
+        }
+        else {
+            Log.e("tag", String.valueOf(player.isPlaying()));
+            if (player.isPlaying()) {
+                player.stop(); //stop playing when user click another song
+            }
+        }
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
                 Log.e("PlaySongActivity", "Player end");
                 if (isLoop) {
-                    player.start();
+                    player.start(); //start player again when user press loop
 
                 } else if (isShuffle) {
-                    playShuffle();
+                    playShuffle(); //shuffle music when user press the shuffle button
                 } else {
-                    playNext();
-                    playSong(true);
+                    playNext(); //if not, play next like what it should do
+                    playSong(true); //play the song, also comes with progressbar
                 }
 
 
             }
         });
+
 
         btnLoop.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,18 +134,20 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
 
                 if (isLoop == true) { //means now the screen (loop) is turned on, and when you click the loop btn which is true, it turns off
                     btnLoop.setImageResource(R.drawable.loop_off); //i clicked a LOOP:ON button, it turns off
-                    isLoop = false;
+                    isLoop = false; //therefore this is false
                     Log.e("btnLoop", "LOOP : OFF");
-                    btnShuffle.setEnabled(true);
+                    btnShuffle.setEnabled(true); //dont let user to press shuffle when i loop
                 } else {
-                    btnLoop.setImageResource(R.drawable.loop_on);
+                    btnLoop.setImageResource(R.drawable.loop_on); //ifi click on the loop, it becomes true, thus setting the loop_on pic
                     isLoop = true;
                     Log.e("btnLoop", "LOOP : ON");
-                    btnShuffle.setEnabled(false);
+                    btnShuffle.setEnabled(false); //dont let user to press shuffle when i loop
                 }
             }
         });
 
+
+        //sane as the loop above this
         btnShuffle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,6 +165,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
             }
         });
 
+        //error checking
         player.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int why) {
@@ -179,6 +193,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
             }
         });
 
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -191,13 +206,14 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(SeekBar seekBar) { //when they finished "sliding" the seekbar (action)
                 int progress = AppUtil.progressToTimer(seekBar.getProgress(), player.getDuration());
                 player.seekTo(progress);
                 updateProgressBar();
                 player.start();
             }
         });
+
 
         btnPlayPause.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -297,15 +313,17 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 return;
             }
 
-            int progress = (int) (((float) player.getCurrentPosition() / player.getDuration()) * 100.0);
-            long duration = player.getCurrentPosition();
+            int progress = (int) (((float) player.getCurrentPosition() / player.getDuration()) * 100.0); //i will be getting something like 0-30 (INT)
+            long duration = player.getCurrentPosition(); //getting something like 0-30000
+
+            //where my formatting comes into play
             currentTime = String.format("%02d:%02d",
                     TimeUnit.MILLISECONDS.toMinutes(duration),
                     TimeUnit.MILLISECONDS.toSeconds(duration) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))
             );
 
-            txtCurrentTime.setText(currentTime);
+            txtCurrentTime.setText(currentTime); //setting the current time
             seekBar.setProgress(progress);
             mHandler.postDelayed(this, 100);
         }
@@ -347,32 +365,37 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         }
     }
 
+
     public void showPopup(View v) {
         PopupMenu popup = new PopupMenu(this, v);
         popup.setOnMenuItemClickListener(this);
-        popup.inflate(R.menu.popup_menu);
+        popup.inflate(R.menu.popup_menu); //inflate using the popup_menu
         Menu menuOpts = popup.getMenu();
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         String songID = sharedPreferences.getString("likedSongID", null);
+
+        //checking to see if the song i am listening to now is liked
         if (songID != null) {
             String[] songIDlist = songID.split(",");
             ArrayList<String> list = new ArrayList<>(Arrays.asList(songIDlist));
+
+            //in this case, it checks to see if my list contains this currentsong.getid
             if (list.contains(currentSong.getId())) {
                 menuOpts.findItem(R.id.like).setTitle("Unlike").setIcon(R.drawable.unlike);
             }
         }
 
-        popup.show();
+        popup.show(); //show popup
     }
 
     @RequiresApi(api = Build.VERSION_CODES.P)
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settings:
+            case R.id.settings: //go to settings
                 Intent goToProfileActivity = new Intent(this, ProfileActivity.class);
                 startActivity(goToProfileActivity);
                 return true;
-            case R.id.share:
+            case R.id.share: //clipboard function
                 Intent goToSharePage = new Intent(this, ShareActivity.class);
                 startActivity(goToSharePage);
                 String baseURL = "https://p.scdn.co/mp3-preview/";
@@ -381,17 +404,18 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 ClipData clip = ClipData.newPlainText("Share Link", shareLink);
                 clipboard.setPrimaryClip(clip);
                 return true;
-            case R.id.like:
+            case R.id.like: //like function
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 String songID = sharedPreferences.getString("likedSongID", null);
-                if (songID == null) {
+
+                if (songID == null) { //add songs into my sharedpref
                     editor.putString("likedSongID", currentSong.getId());
                     String currentSongTitle = currentSong.getTitle();
                     String message = currentSongTitle + " have been added to the Liked Playlist.";
                     Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                     editor.apply();
-                } else {
+                } else { //if there's already stuff inside, i can add new songs now
                     String[] songIDlist = songID.split(",");
                     ArrayList<String> list = new ArrayList<>(Arrays.asList(songIDlist));
                     if (!list.contains(currentSong.getId())) {
@@ -401,9 +425,9 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
                         editor.putString("likedSongID", songID);
                         editor.apply();
-                    } else {
-                        int index = list.indexOf(currentSong.getId());
-                        list.remove(index);
+                    } else { //if not, i will remove it
+                        int index = list.indexOf(currentSong.getId()); //index of songs
+                        list.remove(index); //remove
                         String newSongsID = "";
                         for (String i : list) {
                             if (i != null && i.length() > 0) {
@@ -420,7 +444,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
                 }
                 return true;
 
-                case R.id.viewartiste:
+                case R.id.viewartiste: //view artist function
                     Intent nextPage = new Intent(this, artistProfile.class);
                     nextPage.putExtra("id", currentSong.getId());
                     nextPage.putExtra("title", currentSong.getTitle());
@@ -434,7 +458,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
     }
 
 
-    private void setSongDetails(Song song) {
+    private void setSongDetails(Song song) { //setting my song data
         musicPosition = 0;
         songId = song.getId();
         title = song.getTitle();
@@ -445,7 +469,7 @@ public class PlaySongActivity extends AppCompatActivity implements PopupMenu.OnM
         displaySong(title, artiste, coverArt);
     }
 
-    private void displaySong(String title, String artiste, String coverArt) {
+    private void displaySong(String title, String artiste, String coverArt) { //display all my song data
         txtTitle.setText(title);
         txtArtiste.setText(artiste);
         int imageId = AppUtil.getImageIdFromDrawable(this, coverArt);

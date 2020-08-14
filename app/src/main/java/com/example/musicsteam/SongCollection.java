@@ -54,7 +54,7 @@ public class SongCollection {
 
 
 
-    public Song searchById(String id) {
+    public Song searchById(String id) { //search via a string
         Song selectedSong = null;
 
         for (int index = 0; index < this.songs.size(); index++) {

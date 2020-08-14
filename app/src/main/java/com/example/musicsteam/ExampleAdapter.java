@@ -30,8 +30,9 @@ public class ExampleAdapter extends RecyclerView.Adapter<ExampleAdapter.ExampleV
         public TextView mSongName;
         public TextView mArtisteName;
 
+
         public ExampleViewHolder(View itemView, final OnItemClickListener listener) {
-            super(itemView);
+            super(itemView); //refers to immediate parents property
             mImageView = itemView.findViewById(R.id.imageView);
             mSongName = itemView.findViewById(R.id.songName);
             mArtisteName = itemView.findViewById(R.id.artisteName);

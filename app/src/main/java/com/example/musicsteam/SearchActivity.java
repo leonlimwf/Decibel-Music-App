@@ -27,9 +27,13 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        //getting all my songs from the songcollection
         SongCollection songCollection = new SongCollection();
         mExampleList = songCollection.getSongs();
+
         buildRecyclerView();
+
         EditText editText = findViewById(R.id.edittext);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -40,7 +44,7 @@ public class SearchActivity extends AppCompatActivity {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                filter(s.toString());
+                filter(s.toString()); //filtering when text is being changed
             }
         });
 
@@ -53,12 +57,9 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-
-
-
     private void filter(String text) {
-        filteredList.clear();
-        for (Song item : mExampleList) {
+        filteredList.clear(); //clear my filter list first
+        for (Song item : mExampleList) { //for songitem in my mexamplelist, i will loopthru
             if (item.getTitle().toLowerCase().contains(text.toLowerCase())) {
                 filteredList.add(item);
             }

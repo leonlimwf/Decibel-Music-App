@@ -47,7 +47,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
         LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
         accountName = findViewById(R.id.accountName);
         accountName.setText(credentials.accountName);
@@ -68,16 +67,17 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        //getting all my songs in my songcollection
         SongCollection songCollection = new SongCollection();
         ArrayList<Song> songs = songCollection.getSongs();
 
+        int numberOfSongs = songs.size(); //getting my song's size, 26 in this case
+        double totalSongsLength = 0.0; //initializing it first
 
-        int numberOfSongs = songs.size();
-        double totalSongsLength = 0.0;
-
-        for (Song item : songs) {
-            totalSongsLength += item.getSongLength();
+        for (Song item : songs) { //loop thru my songs
+            totalSongsLength += item.getSongLength(); //adding songs length
         }
+
         numberofsongs = findViewById(R.id.numberOfSongs);
         numberofsongs.setText(numberOfSongs+"");
 
@@ -87,14 +87,14 @@ public class ProfileActivity extends AppCompatActivity {
         accountPicture = findViewById(R.id.accountPicture);
         sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
         String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
-        if (readProfilePicture == null) {
+        if (readProfilePicture == null) { //if there's no new profile picture, it will be set to default
             accountPicture.setImageResource(credentials.accountPicture);
         } else {
-            try {
+            try { //setting the profile image
                 Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
                 accountPicture.setImageBitmap(bitmap);
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); //error catching
             }
         }
 
@@ -123,7 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //when user is done updating it
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
@@ -143,7 +143,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onResume() {
+    protected void onResume() { //Called when the Activity is leaving the foreground and back to the foreground, can be used to release resources or initialize states.
         super.onResume();
         LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
         accountPicture = findViewById(R.id.accountPicture);

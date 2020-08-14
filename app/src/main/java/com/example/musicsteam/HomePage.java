@@ -40,28 +40,31 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_homepage);
+
+        //getting my songs from song collection without manually using the .add method
         SongCollection songCollection = new SongCollection();
         mExampleList = songCollection.getSongs();
+
+
         buildRecyclerView(); //recyclerview
         LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials(); //getting my credentials from my loginscreenactivity
 
 
         imagebutton = findViewById(R.id.user_profile);
-        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
-        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
-        Log.e("Value", readProfilePicture+"");
+        sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE); //getting my sharedpref
+        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null); //getting my sharedpref key of ProfilePictureSave
         if (readProfilePicture == null) {
-            imagebutton.setImageResource(credentials.accountPicture);
+            imagebutton.setImageResource(credentials.accountPicture); //meaning that i have no "New" profile picture, thus set the default
         } else {
             try {
-                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
+                Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture)); //if i got a new one, then i set the new profile picture
                 imagebutton.setImageBitmap(bitmap);
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); //error catching
             }
         }
 
-
+        //open my ProfileActivity.java
         imagebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,6 +78,7 @@ public class HomePage extends AppCompatActivity {
         helloTextView2.setText("Hello, " + credentials.accountName);
 
 
+        //my search bar
         searchBar = findViewById(R.id.searchbarview);
         searchBar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -40,7 +40,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         final LoginScreenActivity.Credentials credentials = new LoginScreenActivity.Credentials();
 
         sharedPref = getSharedPreferences(getString(R.string.sharedpref_profile), Context.MODE_PRIVATE);
-        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null);
+        String readProfilePicture = sharedPref.getString("ProfilePictureSave", null); //getting the key of my profilepicturesave
 
         goBack2 = findViewById(R.id.goBack2);
         goBack2.setOnClickListener(new View.OnClickListener() {
@@ -61,22 +61,23 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         SongCollection songCollection = new SongCollection();
         mExampleList = songCollection.getSongs();
 
-        int size = mExampleList.size();
         button = findViewById(R.id.editprofile_name);
         button.setText(credentials.accountName);
 
         accountPicture = findViewById(R.id.editprofile_picture);
         if (readProfilePicture == null) {
-            accountPicture.setImageResource(credentials.accountPicture);
+            accountPicture.setImageResource(credentials.accountPicture); //setting
         } else {
             try {
                 Bitmap bitmap =  MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.parse(readProfilePicture));
-                accountPicture.setImageBitmap(bitmap);
+                accountPicture.setImageBitmap(bitmap); //setting new profile pcture
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
+
+        //where all the changing profile picture work
         changeProfilePic = findViewById(R.id.changeprofilepicbtn);
         changeProfilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +91,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //when user is done
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {

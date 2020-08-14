@@ -76,6 +76,7 @@
         android:textColor="#2699fb"
         android:textSize="12sp"
         android:clickable="true"
+        
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editprofile_picture" />
