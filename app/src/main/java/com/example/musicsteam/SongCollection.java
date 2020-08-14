@@ -25,7 +25,7 @@ public class SongCollection {
 
 // Obtain a number between [0 - 49].
         int n = rand.nextInt(5);
-        this.currentSongIndex += n;
+        this.currentSongIndex += n+1;
         if (this.currentSongIndex > this.songs.size() - 1) {
             this.currentSongIndex = 1;
         }
